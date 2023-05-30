@@ -70,40 +70,49 @@ $(document).ready(function () {
         else if (ht == "dl"){
             var $help = "Want to monetize a deal where the numbers don't work out? We are here to help!";
             document.querySelector('#submit-button').value = '👉 Monetize lead';
-        $("#motivation").prop('required',true);
-        $("#mls_status-2").prop('required',true);
+            $("#motivation").prop('required',true);
+            $("#mls_status-2").prop('required',true);
+
+            // Show why dead lead and last conversation with seller fields
+            $('#deadlead_details').addClass('show');
+            $("#why_dl").prop('required',true);
+            $("#spoke_seller").prop('required',true);
+
         }
         else if (ht == "closer"){
             var $help = "Need assitance from a Lanza Team closer? We are here to help!";
-        document.querySelector('#submit-button').value = '👉 Request closer';
+            document.querySelector('#submit-button').value = '👉 Request closer';
         }
         else if (ht == "dispo"){
             var $help = "Want to stay focused on acquisitions and delegate the dispo? We are here to help!";
             document.querySelector('#submit-button').value = '👉 Request dispo';
-        $('#dispo-sec').addClass('dispo--show');
-        $('#add_comments1').attr('placeholder','Specific instruction for COE, age of majors (HVAC, roof, foundation), it’s near a train track, etc');
+            $('#dispo-sec').addClass('dispo--show');
+            $('#add_comments1').attr('placeholder','Specific instruction for COE, age of majors (HVAC, roof, foundation), it’s near a train track, etc');
         }
         else if (ht == "tc"){
             var $help = "Want to stay focused on new deals and delegate the Transaction Coordinating work? We are here to help!";
-        document.querySelector('#submit-button').value = '👉 Hire a TC';
+            document.querySelector('#submit-button').value = '👉 Hire a TC';
         }
         else if (ht == "data"){
             var $help = "Want a jumpstart with fresh data from the county? We are here to help!"
-        document.querySelector('#data-description').style.fontWeight = "bold";
+            document.querySelector('#data-description').style.fontWeight = "bold";
             document.querySelector('#submit-button').value = '👉 Request data';
         }
         else if (ht == "dialer"){
             var $help = "Want to focus on just making calls? We have data and a dialer available for you!"
             document.querySelector('#data-description').innerHTML = "This resource is focused on helping new wholesalers get their first couple of deals with a single-line dialer. We take care of the setup and compliance.";
             document.querySelector('#data-disclaimer').innerHTML = "*Note: Lanza Partners will pay for the data, the dialer seat and required setups. We keep track of usage metrics. If the dialer is unused, it will be reassigned to another applicant.";
-        document.querySelector('#submit-button').value = '👉 Apply';
+            document.querySelector('#submit-button').value = '👉 Apply';
         }
         else if (ht == "zoom"){
             var $help = "Want to join our community and get specific questions answered?"
             document.querySelector('#submit-button').value = '👉 Join';
         }
-        else {var $help = " "};
+        else {
+            var $help = " "
+        };
         document.querySelector('.h_type').innerHTML = $help;
+
         // Define existing contact welcome text
         $('#existing-text').toggleClass('existing--hide', need_name == 'Y');
         
@@ -140,15 +149,18 @@ $(document).ready(function () {
         // hide prel
         document.getElementById('preloader-submit2').style="display: none; opacity: 0";
     });
-    // Def dealDispute
+
+    // Define dealDispute link
     document.getElementById("deal-dispute").onclick = function () {
     location.href = "https://www.lanzapartners.com/deal-dispute?ht=" + ht + "&email=" + email + "&address=" + address;
     };
-    // Def wrongAddress
+
+    // Define wrongAddress link
     document.getElementById("wrong-link").onclick = function () {
     location.href = "https://www.lanzapartners.com/submit?t=" + ht + "&email=" + email;
     };
 });
+
 
 
 // MLS fields
@@ -160,20 +172,34 @@ $(function() {
     const $fields2 = $('#mlsdetails2-div');
     const $agentn = $('#agent-fn');
     const $agentl = $('#agent-ln');
+
     $select.on('change', (e) => {
         const value = e.currentTarget.value;
         console.log(value);
         if (value == 'on_market'){
             $fields.addClass('mlsdetails--show')
             $d2a.prop('required',true);
+            // Unmark d2s fields as required
+            $('#owners_name').prop('required',false);
+            $('#owners_phone').prop('required',false);
+
         } else {
+            // Unmark d2a fields as required
             $d2a.prop('required',false);
             $inputPhone.prop('required',false);
             $agentn.prop('required',false);
             $agentl.prop('required',false);
             $fields.removeClass('mlsdetails--show');
             $fields2.removeClass('mlsdetails--show');
-            if (ht != "dispo"){$('#owners-div').addClass('owners--show');}
+
+            // Optional to get seller contact fields
+            $('#owners-div').addClass('owners--show');
+
+            // Make it required if it's not dispo
+            if (ht != "dispo"){
+                $('#owners_name').prop('required',true);
+                $('#owners_phone').prop('required',true);
+            }
         }
     });
     
@@ -185,7 +211,10 @@ $(function() {
             $inputPhone.prop('required',true);
             $agentn.prop('required',true);
             $agentl.prop('required',true);
+
+            // Hide seller contact fields
             $('#owners-div').removeClass('owners--show');
+
         } else {
             $inputPhone.prop('required',false);
             $agentn.prop('required',false);
@@ -193,8 +222,14 @@ $(function() {
             // Remove fields
             $('#aphone').removeClass('aphone--show');
             $fields2.removeClass('mlsdetails--show');
+
+            // Optional to get seller contact fields
+            $('#owners-div').addClass('owners--show');
+
+            // Make it required if it's not dispo
             if (ht != "dispo"){
-                $('#owners-div').addClass('owners--show');
+                $('#owners_name').prop('required',true);
+                $('#owners_phone').prop('required',true);
             }
         }
     });
