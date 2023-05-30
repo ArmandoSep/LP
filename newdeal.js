@@ -175,13 +175,15 @@ $(function() {
 
     $select.on('change', (e) => {
         const value = e.currentTarget.value;
-        console.log(value);
+
         if (value == 'on_market'){
             $fields.addClass('mlsdetails--show')
             $d2a.prop('required',true);
             // Unmark d2s fields as required
             $('#owners_name').prop('required',false);
             $('#owners_phone').prop('required',false);
+            // Hide owners contact field
+            $('#owners-div').removeClass('owners--show');
 
         } else {
             // Unmark d2a fields as required
@@ -197,6 +199,7 @@ $(function() {
 
             // Make it required if it's not dispo
             if (ht != "dispo"){
+                console.log('making owners name required');
                 $('#owners_name').prop('required',true);
                 $('#owners_phone').prop('required',true);
             }
@@ -214,6 +217,8 @@ $(function() {
 
             // Hide seller contact fields
             $('#owners-div').removeClass('owners--show');
+            $('#owners_name').prop('required',false);
+            $('#owners_phone').prop('required',false);
 
         } else {
             $inputPhone.prop('required',false);
@@ -225,9 +230,12 @@ $(function() {
 
             // Optional to get seller contact fields
             $('#owners-div').addClass('owners--show');
-
             // Make it required if it's not dispo
+            console.log("ht")
+            console.log(ht)
+            console.log('--')
             if (ht != "dispo"){
+                console.log('making owners name required');
                 $('#owners_name').prop('required',true);
                 $('#owners_phone').prop('required',true);
             }
