@@ -172,6 +172,7 @@ $(function() {
     const $fields2 = $('#mlsdetails2-div');
     const $agentn = $('#agent-fn');
     const $agentl = $('#agent-ln');
+    const ht = $("#help_type").val();
 
     $select.on('change', (e) => {
         const value = e.currentTarget.value;
@@ -207,6 +208,7 @@ $(function() {
     });
     
     $d2a.on('change', (e) => {
+        const ht = $("#help_type").val();
     	const value = e.currentTarget.value;
         if (value == 'yes'){
             $fields2.addClass('mlsdetails--show')
