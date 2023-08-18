@@ -72,6 +72,8 @@ $(document).ready(function () {
             document.querySelector('#submit-button').value = '👉 Monetize lead';
             $("#motivation").prop('required',true);
             $("#mls_status-2").prop('required',true);
+            $("#condition-2").prop('required',true);
+            //$("#price").prop('required',true);
 
             // Show why dead lead and last conversation with seller fields
             $('#deadlead_details').addClass('show');
@@ -82,6 +84,11 @@ $(document).ready(function () {
         else if (ht == "closer"){
             var $help = "Need assitance from a Lanza Team closer? We are here to help!";
             document.querySelector('#submit-button').value = '👉 Request closer';
+            $("#motivation").prop('required',true);
+            $("#condition-2").prop('required',true);
+            $("#price").prop('required',true);
+            $("#mls_status-2").prop('required',true);
+            
         }
         else if (ht == "dispo"){
             var $help = "Want to stay focused on acquisitions and delegate the dispo? We are here to help!";
